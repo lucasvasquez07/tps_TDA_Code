@@ -41,6 +41,27 @@ class TestInvictos(unittest.TestCase):
 
         self.assertEqual(_normalizar(invictas), [(7, 7)])
         self.assertEqual(cantidad, 1)
+
+    def test_ejemplo_del_enunciado_con_criatura_suprema_y_duplicados(self):
+        entrada = [(3, 4), (1, 5), (4, 2), (2, 2), (5, 1), (4, 5), (6, 6), (7, 7), (7, 7)]
+        invictas, cantidad = invictos(entrada)
+
+        self.assertEqual(_normalizar(invictas), [(7, 7), (7, 7)])
+        self.assertEqual(cantidad, 2)
+
+    def test_ejemplo_del_enunciado_con_criatura_suprema_y_duplicados_y_otros_invictos(self):
+        entrada = [(3, 4), (1, 5), (4, 2), (2, 2), (5, 1), (4, 5), (6, 6), (7, 7), (7, 7), (8, 1)]
+        invictas, cantidad = invictos(entrada)
+
+        self.assertEqual(_normalizar(invictas), [(7, 7), (7, 7), (8, 1)])
+        self.assertEqual(cantidad, 3)
+
+    def test_ejemplo_del_enunciado_con_criatura_suprema_y_duplicados_y_otros_invictos_y_otros_derrotados(self):
+        entrada = [(3, 4), (1, 5), (4, 2), (2, 2), (5, 1), (4, 5), (6, 6), (7, 7), (7, 7), (8, 1), (8, 8)]
+        invictas, cantidad = invictos(entrada)
+
+        self.assertEqual(_normalizar(invictas), [(8, 1), (8, 8)])
+        self.assertEqual(cantidad, 2)
     
 class TestLavarropas(unittest.TestCase):
 

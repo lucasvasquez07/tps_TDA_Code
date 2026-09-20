@@ -28,6 +28,20 @@ class TestInvictos(unittest.TestCase):
         self.assertEqual(_normalizar(invictas), [(4, 2), (4, 5), (5, 1)])
         self.assertEqual(cantidad, 3)
 
+    def test_ejemplo_del_enunciado_con_cantidad_impar(self):
+        entrada = [(3, 4), (1, 5), (4, 2), (2, 2), (5, 1), (4, 5), (5, 3)]
+        invictas, cantidad = invictos(entrada)
+
+        self.assertEqual(_normalizar(invictas), [ (4, 5), (5, 1), (5, 3)])
+        self.assertEqual(cantidad,3)
+
+    def test_ejemplo_del_enunciado_con_criatura_suprema(self):
+        entrada = [(3, 4), (1, 5), (4, 2), (2, 2), (5, 1), (4, 5), (6, 6), (7, 7)]
+        invictas, cantidad = invictos(entrada)
+
+        self.assertEqual(_normalizar(invictas), [(7, 7)])
+        self.assertEqual(cantidad, 1)
+    
 class TestLavarropas(unittest.TestCase):
 
     def test_no_ropas(self):

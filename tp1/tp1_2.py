@@ -12,7 +12,7 @@ def combinar_soluciones(izquierda: list[tuple[int, int]], derecha: list[tuple[in
         return izquierda
     atk_min = min(criatura[0] for criatura in derecha)
     def_max = max(criatura[1] for criatura in derecha)
-    izquierda_filtrados = [criatura for criatura in izquierda if criatura[0] == atk_min or criatura[1] > def_max]  
+    izquierda_filtrados = [criatura for criatura in izquierda if criatura[1] > def_max or (criatura[1]>= def_max and criatura[0] == atk_min)]
     return izquierda_filtrados + derecha
 
 

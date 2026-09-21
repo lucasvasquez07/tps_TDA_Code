@@ -1,5 +1,5 @@
 def main(criaturas: list[tuple[int, int]]) -> tuple[list[int, int], int]:
-    criaturas_ordenadas = sorted(criaturas, key=lambda c: (c[0], -c[1]))
+    criaturas_ordenadas = ordenar_criaturas(criaturas)
     
     invictas = resolver_combates(criaturas_ordenadas)
 
@@ -25,3 +25,42 @@ def resolver_combates(criaturas: list[tuple[int, int]]) -> list[tuple[int, int]]
     izquierda = resolver_combates(criaturas[:mitad])
     derecha = resolver_combates(criaturas[mitad:])
     return combinar_soluciones(izquierda, derecha)
+
+
+def ordenar_criaturas(criaturas):
+    """Ordena por ataque de manera ascendente y, en caso de empate, por defensa descendente."""
+    if len(criaturas) <= 1:
+        return criaturas
+
+    medio = len(criaturas) // 2
+
+    izquierda = ordenar_criaturas(criaturas[:medio])
+    derecha = ordenar_criaturas(criaturas[medio:])
+
+    return merge(izquierda, derecha)
+
+
+def merge(izquierda, derecha):
+    ordenados = []
+    i = 0
+    j = 0
+
+    while i < len(izquierda) and j < len(derecha):
+        if izquierda[i][0] < derecha[j][0]:
+            ordenados.append(izquierda[i])
+            i += 1
+        elif izquierda[i][0] > derecha[j][0]:
+            ordenados.append(derecha[j])
+            j += 1
+        else:
+            if izquierda[i][1] >= derecha[j][1]:
+                ordenados.append(izquierda[i])
+                i += 1
+            else:
+                ordenados.append(derecha[j])
+                j += 1
+
+    ordenados.extend(izquierda[i:])
+    ordenados.extend(derecha[j:])
+
+    return ordenados
